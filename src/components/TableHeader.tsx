@@ -15,7 +15,6 @@ const TableHeaderComponent = styled.div`
   flex-flow: row wrap;
   padding: 24px;
   align-items: center;
-  color: ${(props => props.theme.color?.header) || 'black'};
   line-height: 1.75;
   letter-spacing: 0;
   font-family: 'Avenir Heavy';
@@ -46,6 +45,7 @@ const TableHeaderComponent = styled.div`
   }
   @media ${device.lg} {
     font-size: 20px;
+    padding: 24px;
     border-top-left-radius: ${(props => props.theme.radius) || 16}px;
     border-top-right-radius: ${(props => props.theme.radius) || 16}px;
   }
@@ -65,6 +65,7 @@ const TableHeaderCell = styled.div.attrs(
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: ${(props => props.theme.color?.header) || 'black'};
 `
 
 const TableHeaderSelectableCell = styled.div`

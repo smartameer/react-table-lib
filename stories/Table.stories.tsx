@@ -59,22 +59,22 @@ Default.args = {
     {
       'operator': '*Celcom Axiata (LTE)',
       'headset_display': 'CELCOM / My Celcom / 502 19',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': '*DiGi Telecom (LTE)',
       'headset_display': 'DiGi 1800 / DiGi / MYMY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': '*Maxis (LTE)',
       'headset_display': 'U Mobile / MYS 18 / MY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': 'U Mobile (LTE)',
       'headset_display': 'U Mobile / MYS 18 / MY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     }
   ]
 };
@@ -92,22 +92,22 @@ ColumnsMapping.args = {
     {
       'operator': '*Celcom Axiata (LTE)',
       'headset_display': 'CELCOM / My Celcom / 502 19',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': '*DiGi Telecom (LTE)',
       'headset_display': 'DiGi 1800 / DiGi / MYMY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': '*Maxis (LTE)',
       'headset_display': 'U Mobile / MYS 18 / MY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': 'U Mobile (LTE)',
       'headset_display': 'U Mobile / MYS 18 / MY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     }
   ],
   columns: {
@@ -130,22 +130,22 @@ Selectable.args = {
     {
       'operator': '*Celcom Axiata (LTE)',
       'headset_display': 'CELCOM / My Celcom / 502 19',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': '*DiGi Telecom (LTE)',
       'headset_display': 'DiGi 1800 / DiGi / MYMY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': '*Maxis (LTE)',
       'headset_display': 'U Mobile / MYS 18 / MY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': 'U Mobile (LTE)',
       'headset_display': 'U Mobile / MYS 18 / MY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     }
   ],
   columns: {
@@ -169,22 +169,22 @@ Themed.args = {
     {
       'operator': '*Celcom Axiata (LTE)',
       'headset_display': 'CELCOM / My Celcom / 502 19',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': '*DiGi Telecom (LTE)',
       'headset_display': 'DiGi 1800 / DiGi / MYMY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': '*Maxis (LTE)',
       'headset_display': 'U Mobile / MYS 18 / MY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     },
     {
       'operator': 'U Mobile (LTE)',
       'headset_display': 'U Mobile / MYS 18 / MY18',
-      '3g_availability': true,
+      '3g_availability': 'Yes',
     }
   ],
   columns: {

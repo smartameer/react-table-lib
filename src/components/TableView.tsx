@@ -3,6 +3,7 @@ import { ColumnMappings, TableProps } from '../types'
 import styled from 'styled-components'
 import TableHeader from './TableHeader'
 import { device } from '../theme/devices'
+import TableBody from './TableBody'
 
 const responsiveRadius = (radius: number) =>
   radius >= 8 && radius / 2 < 8 ? 8 : radius / 2
@@ -67,10 +68,11 @@ const TableView: FC<TableProps> = ({ title, data, columns, selectable }) => {
         columns={columnsList}
         selectable={selectable}
       />
-      <br />
-      {JSON.stringify(data)}
-      <br />
-      {JSON.stringify(columns)}
+      <TableBody
+        data={data}
+        columns={columnsList}
+        selectable={selectable}
+      />
     </TableContainer>
   )
 }
