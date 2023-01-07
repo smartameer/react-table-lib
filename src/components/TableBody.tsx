@@ -26,17 +26,28 @@ const TableBody: FC<TableBodyProps> = ({
     selectable === Selectable.multiple ? {} : null
   )
 
-  const handleSelectedRow = (data: TableRecord, index: number) => {
+  const handleSelectedRow = (item: TableRecord, index: number) => {
     if (selectable === Selectable.single) {
       setSelected(selected === index ? null : index)
-      handleSelect && handleSelect(data)
+      handleSelect && handleSelect(item)
     }
     if (selected instanceof Object && selectable === Selectable.multiple) {
       const key = `row-${index}` as string
-      setSelected({
+      const records = {
         ...selected,
         [key]: selected[key] === 'yes' ? null : 'yes',
-      })
+      }
+      setSelected(records)
+
+      if (handleSelect) {
+        const selectedRecords = [] as Array<TableRecord>
+        Object.keys(records).forEach(d => {
+          if (records[d] === 'yes') {
+            selectedRecords.push(data[parseInt(d.split('-')[1])])
+          }
+        })
+        handleSelect(selectedRecords)
+      }
     }
   }
 
