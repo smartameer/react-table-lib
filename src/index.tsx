@@ -23,6 +23,7 @@ const Table: FC<TableProps> = ({
   theme = DefaultTheme,
   columns = {},
   selectable,
+  onSelect,
 }) => {
   if (data === null || !data || !(data instanceof Array)) {
     return (
@@ -43,6 +44,7 @@ const Table: FC<TableProps> = ({
         columns={columns}
         title={title}
         selectable={selectable}
+        onSelect={onSelect}
       />
     </ThemeProvider>
   )

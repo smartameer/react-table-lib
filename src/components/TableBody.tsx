@@ -1,75 +1,105 @@
-import React, { FC, Fragment } from 'react'
-import styled from 'styled-components'
-import { ColumnMappings, Selectable, TableRecord } from '../types'
-import { device } from '../theme/devices'
+import React, { FC, Fragment, useState } from 'react'
+import {
+  ColumnMapping,
+  Selectable,
+  TableBodyProps,
+  TableRecord,
+} from '../types'
+import InputSelect from './InputSelect'
+import {
+  TableBodyCell,
+  TableBodyRow,
+  TableBodyRowSelectableCell,
+} from './components'
 
-
-
-interface TableBodyProps {
-  data: Array<TableRecord>
-  columns: ColumnMappings
-  selectable?: Selectable
+interface RowsSelected {
+  [key: string]: string | null
 }
 
-const TableBodyRow = styled.div.attrs(
-  (props: { noborder: boolean; }) => props
-)`
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  font-family: 'Avenir Book';
-  @media ${device.xs} {
-    padding: 8px 16px;
-  }
-  @media ${device.sm} {
-    padding: 8px 16px;
-  }
-  @media ${device.md} {
-    padding: 8px 16px;
-  }
-  @media ${device.lg} {
-    padding: 24px;
-  }
-  ${props => props.noborder ? '' : 'border-bottom: 1px solid ' + props.theme.color?.border || '#e1e1e1'};
-`
-const TableBodyCell = styled.div.attrs(
-  (props: { selectable: boolean; size: number }) => props
-)`
-  width: calc(
-    ${props => (props.selectable ? '(100% - 48px)' : '100%')} /
-      ${props => props.size}
-  );
-  color: ${(props => props.theme.color?.default) || 'black'};
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`
+const TableBody: FC<TableBodyProps> = ({
+  columns,
+  data,
+  selectable,
+  onSelect: handleSelect,
+}) => {
+  const [selected, setSelected] = useState<number | RowsSelected | null>(
+    selectable === Selectable.multiple ? {} : null
+  )
 
-const TableBodyRowSelectableCell = styled.div`
-  width: 48px;
-`
+  const handleSelectedRow = (data: TableRecord, index: number) => {
+    if (selectable === Selectable.single) {
+      setSelected(selected === index ? null : index)
+      handleSelect && handleSelect(data)
+    }
+    if (selected instanceof Object && selectable === Selectable.multiple) {
+      const key = `row-${index}` as string
+      setSelected({
+        ...selected,
+        [key]: selected[key] === 'yes' ? null : 'yes',
+      })
+    }
+  }
 
-const TableBody: FC<TableBodyProps> = ({ columns, data, selectable }) => {
-  console.log(selectable);
+  const checkSelected = (key: number) => {
+    if (selectable === Selectable.single) {
+      return selected !== null && selected === key
+    }
+
+    if (selectable === Selectable.multiple) {
+      return selected instanceof Object && selected[`row-${key}`] === 'yes'
+    }
+    return false
+  }
+
+  const getRowValue = (data: any, column: ColumnMapping): string => {
+    if (column['format']) {
+      return column['format'](data)
+    }
+
+    try {
+      return data.toString()
+    } catch (error) {
+      console.log('Error in transforming to string', error)
+    }
+    return data || '-'
+  }
+
   if (data) {
     return (
       <Fragment>
         {data.map((record, key) => (
-          <TableBodyRow key={key} role="rowgroup" noborder={data.length === key + 1}>
+          <TableBodyRow
+            key={`row-${key}`}
+            role="rowgroup"
+            noborder={data.length === key + 1}
+            selected={checkSelected(key)}
+            size={Object.keys(columns).length}
+          >
             {selectable && (
-              <TableBodyRowSelectableCell>&nbsp;</TableBodyRowSelectableCell>
+              <TableBodyRowSelectableCell size={Object.keys(columns).length}>
+                <InputSelect
+                  type={selectable}
+                  onSelect={handleSelectedRow}
+                  data={record}
+                  index={key}
+                  name={`row-${selectable}`}
+                />
+              </TableBodyRowSelectableCell>
             )}
-            {Object.keys(columns).map(column => (
-              <Fragment key={key}>
-                <TableBodyCell
-                  role="cell"
-                  size={Object.keys(columns).length}
-                  selectable={!!selectable}
-                >
-                  {record[column]}
-                </TableBodyCell>
-              </Fragment>
+            {Object.keys(columns).map((column, index) => (
+              <TableBodyCell
+                key={`cell-${key}-${index}`}
+                role="cell"
+                size={Object.keys(columns).length}
+                selectable={!!selectable}
+              >
+                <strong className="header" title={columns[column].label}>
+                  {columns[column].label}:{' '}
+                </strong>
+                <span title={getRowValue(record[column], columns[column])}>
+                  {getRowValue(record[column], columns[column])}
+                </span>
+              </TableBodyCell>
             ))}
           </TableBodyRow>
         ))}

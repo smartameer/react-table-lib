@@ -13,6 +13,7 @@ const DefaultTheme = {
     border: '#e1e1e1',
     header: 'black',
     selected: 'black',
+    primary: '#4937ad',
   },
 } as ThemeModel
 
