@@ -99,7 +99,7 @@ export const TableHeaderComponent = styled.div.attrs(
   align-items: center;
   line-height: 1.75;
   letter-spacing: 0;
-  font-family: 'Avenir Heavy';
+  font-family: 'Avenir Heavy', arial, sans-serif;
   display: flex;
   background: ${(props => props.theme.background?.header) || '#f3f3f3'};
   @media ${device.xs} {
@@ -174,7 +174,7 @@ export const TableBodyRow = styled.div.attrs(
 )`
   display: flex;
   align-items: center;
-  font-family: 'Avenir Book';
+  font-family: 'Avenir Book', arial, sans-serif;
   flex-flow: row wrap;
 
   @media ${device.xs} {
@@ -263,7 +263,7 @@ export const TableContainer = styled.div`
   display: block;
   width: 100%;
   max-width: 98vw;
-  font-family: 'Avenir Book';
+  font-family: 'Avenir Book', arial, sans-serif;
   @media ${device.xs} {
     border-radius: ${(props => responsiveRadius(props.theme.radius)) || 8}px;
   }
