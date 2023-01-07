@@ -102,6 +102,7 @@ Single.args = {
 export const Mutiple = Template.bind({});
 
 Mutiple.args = {
+  title: 'Account Details',
   data: [
     {
       'company': 'Blue Ocean International',
@@ -138,4 +139,88 @@ Mutiple.args = {
   },
   selectable: 'multiple',
   onSelect: action('selected')
+};
+
+
+
+export const Themed = Template.bind({});
+
+Themed.args = {
+  title: 'Talk Time Details',
+  data: [
+    {
+      destination: 'Bangladesh',
+      mins: 240,
+      rate_per_min: 0.03
+    },
+    {
+      destination: 'China',
+      mins: 600,
+      rate_per_min: 0.01
+    },
+    {
+      destination: 'India',
+      mins: 600,
+      rate_per_min: 0.01
+    },
+    {
+      destination: 'Indonesia',
+      mins: 90,
+      rate_per_min: 0.07
+    },
+    {
+      destination: 'Malaysia',
+      mins: 60,
+      rate_per_min: 0.01
+    },
+    {
+      destination: 'Myanmar',
+      mins: 35,
+      rate_per_min: 0.17
+    },
+    {
+      destination: 'Philipines',
+      mins: 40,
+      rate_per_min: 0.15
+    },
+    {
+      destination: 'Thailand',
+      mins: 120,
+      rate_per_min: 0.05
+    },
+    {
+      destination: 'Vietnam',
+      mins: 60,
+      rate_per_min: 0.10
+    },
+  ],
+  columns: {
+    'destination' : {
+      label: 'Destination'
+    },
+    'mins': {
+      label: 'Mins'
+    },
+    'rate_per_min': {
+      label: 'Rate/min',
+      format: data => '$' + data
+    }
+  },
+  selectable: 'single',
+  theme: {
+    radius: 3,
+    background: {
+      default: '#fefef3',
+      selected: '#ddffcc',
+      header: '#333333',
+      shadow: '#ececec'
+    },
+    color: {
+      default: '#282828',
+      border: '#dddddd',
+      header: '#eeeeee',
+      selected: '#004c00',
+      primary: '#449966'
+    }
+  }
 };

@@ -87,7 +87,10 @@ const TableBody: FC<TableBodyProps> = ({
             size={Object.keys(columns).length}
           >
             {selectable && (
-              <TableBodyRowSelectableCell size={Object.keys(columns).length}>
+              <TableBodyRowSelectableCell
+                selectable={!!selectable}
+                size={Object.keys(columns).length}
+              >
                 <InputSelect
                   type={selectable}
                   onSelect={handleSelectedRow}
@@ -104,7 +107,7 @@ const TableBody: FC<TableBodyProps> = ({
                 size={Object.keys(columns).length}
                 selectable={!!selectable}
               >
-                <strong className="header" title={columns[column].label}>
+                <strong className="header-title" title={columns[column].label}>
                   {columns[column].label}:{' '}
                 </strong>
                 <span title={getRowValue(record[column], columns[column])}>

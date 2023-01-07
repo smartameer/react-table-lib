@@ -92,7 +92,7 @@ export const Input = styled.input`
 `
 
 export const TableHeaderComponent = styled.div.attrs(
-  (props: { size: number }) => props
+  (props: { size: number; selectable: boolean }) => props
 )`
   flex-flow: row wrap;
   padding: 24px;
@@ -110,10 +110,12 @@ export const TableHeaderComponent = styled.div.attrs(
     border-top-right-radius: ${(props =>
       responsiveRadius(props.theme.radius)) || 8}px;
     & .non-responsive {
-      display: ${props => (props.size > 3 ? 'none' : 'flex')};
+      display: ${props =>
+        props.size > 3 - (!!props.selectable ? 1 : 0) ? 'none' : 'flex'};
     }
     & .responsive {
-      display: ${props => (props.size > 3 ? 'flex' : 'none')};
+      display: ${props =>
+        props.size > 3 - (!!props.selectable ? 1 : 0) ? 'flex' : 'none'};
     }
   }
   @media ${device.xs} {
@@ -177,10 +179,6 @@ export const TableBodyRow = styled.div.attrs(
 
   @media ${device.xs} {
     padding: 8px 16px;
-    ${props =>
-      props.size > 3
-        ? '& .header { width: 40%; max-width: 100px; display: inline-block; }'
-        : ''}
   }
   @media ${device.sm} {
     padding: 8px 16px;
@@ -190,9 +188,6 @@ export const TableBodyRow = styled.div.attrs(
   }
   @media ${device.lg} {
     padding: 24px;
-    & .header {
-      display: none;
-    }
   }
   ${props =>
     props.noborder
@@ -216,16 +211,23 @@ export const TableBodyCell = styled.div.attrs(
   overflow: hidden;
   text-overflow: ellipsis;
 
+  & .header-title {
+    display: none;
+  }
   @media ${device.xs} {
     width: calc(
       ${props =>
-        props.size > 3
+        props.size > 3 - (!!props.selectable ? 1 : 0)
           ? '100%'
           : (props.selectable ? '(100% - 48px)' : '100%') + ' /  ' + props.size}
     );
     ${props =>
-      props.size > 3
+      props.size > 3 - (!!props.selectable ? 1 : 0)
         ? 'margin-left: 48px;margin-top: -10px;margin-bottom: 16px;'
+        : ''}
+    ${props =>
+      props.size > 3 - (!!props.selectable ? 1 : 0)
+        ? '& > .header-title {width: 40%; max-width: 110px; display: inline-block;}'
         : ''}
   }
 
@@ -235,15 +237,19 @@ export const TableBodyCell = styled.div.attrs(
         ${props => props.size}
     );
     margin: inherit;
+    & .header-title {
+      display: none;
+    }
   }
 `
 
 export const TableBodyRowSelectableCell = styled.div.attrs(
-  (props: { size: number }) => props
+  (props: { size: number; selectable: boolean }) => props
 )`
   width: 48px;
   @media ${device.xs} {
-    ${props => (props.size > 3 ? 'padding-top: 16px;' : '')}
+    ${props =>
+      props.size > 3 - (!!props.selectable ? 1 : 0) ? 'padding-top: 16px;' : ''}
   }
   @media ${device.lg} {
     padding-top: 0px;

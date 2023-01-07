@@ -95,29 +95,7 @@ Error.args = {
 export const ColumnsMapping = Template.bind({});
 
 ColumnsMapping.args = {
+  title: 'Telecom List',
   data,
   columns
-};
-
-export const Themed = Template.bind({});
-
-Themed.args = {
-  data,
-  columns,
-  theme: {
-    radius: 3,
-    background: {
-      default: '#fefef3',
-      selected: '#ddffcc',
-      header: '#333333',
-      shadow: '#ececec'
-    },
-    color: {
-      default: '#282828',
-      border: '#dddddd',
-      header: '#eeeeee',
-      selected: '#004c00',
-      primary: '#449966'
-    }
-  }
 };

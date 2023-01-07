@@ -16,7 +16,11 @@ const TableHeader: FC<TableHeaderProps> = ({ columns, selectable, title }) => {
   const columnsList = Object.keys(columns)
 
   return (
-    <TableHeaderComponent role="rowgroup" size={columnsList.length}>
+    <TableHeaderComponent
+      role="rowgroup"
+      size={columnsList.length}
+      selectable={!!selectable}
+    >
       {selectable && (
         <TableHeaderSelectableCell>&nbsp;</TableHeaderSelectableCell>
       )}
