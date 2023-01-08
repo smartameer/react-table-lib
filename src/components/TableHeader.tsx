@@ -4,6 +4,7 @@ import {
   TableHeaderCell,
   TableHeaderComponent,
   TableHeaderSelectableCell,
+  camelCase,
 } from './components'
 import SortButton from './SortButton'
 
@@ -59,7 +60,7 @@ const TableHeader: FC<TableHeaderProps> = ({
           role="columnheader"
           className="non-responsive"
         >
-          {columns[key].label}
+          {columns[key].label || camelCase(key)}
           {columns[key].sortable && (
             <SortButton
               column={key}

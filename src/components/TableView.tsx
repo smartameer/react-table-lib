@@ -7,18 +7,7 @@ import {
 } from '../types'
 import TableHeader from './TableHeader'
 import TableBody from './TableBody'
-import { TableContainer } from './components'
-
-const camelCase = (str: string) => {
-  return str
-    .replace('_', ' ')
-    .split(' ')
-    .map(word => {
-      const result = word.replace(/([A-Z])/g, ' $1')
-      return result.charAt(0).toUpperCase() + result.slice(1)
-    })
-    .join(' ')
-}
+import { TableContainer, camelCase } from './components'
 
 const TableView: FC<TableViewProps> = ({
   title,
@@ -52,12 +41,14 @@ const TableView: FC<TableViewProps> = ({
   const handleSort = (column: string, order: SortOrder): void => {
     const sortedRecords = [...data]
     sortedRecords.sort((a: TableRecord, b: TableRecord) => {
-      if (typeof a[column] === 'string') {
+      const valueA = a[column] === null ? '' : a[column];
+      const valueB = b[column] === null ? '' : b[column];
+      if (typeof valueA === 'string') {
         // @ts-ignore
-        return order === SortOrder.asc ? a[column].localeCompare(b[column]) : b[column].localeCompare(a[column])
+        return order === SortOrder.asc ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA)
       }
       // @ts-ignore
-      return order === SortOrder.asc ? a[column] - b[column] : b[column] - a[column]
+      return order === SortOrder.asc ? (valueA > valueB ? -1 : ((valueA < valueB) ? 1 : 0)) : (valueA < valueB ? -1 : ((valueA > valueB) ? 1 : 0))
     })
     setRecords(sortedRecords)
   }

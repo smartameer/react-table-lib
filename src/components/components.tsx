@@ -4,6 +4,17 @@ import { device } from '../theme/devices'
 const responsiveRadius = (radius: number) =>
   radius >= 8 && radius / 2 < 8 ? 8 : radius / 2
 
+export const camelCase = (str: string) => {
+  return str
+    .replace('_', ' ')
+    .split(' ')
+    .map(word => {
+      const result = word.replace(/([A-Z])/g, ' $1')
+      return result.charAt(0).toUpperCase() + result.slice(1)
+    })
+    .join(' ')
+}
+
 export const Button = styled.button`
   border-radius: 50%;
   width: 36px;
