@@ -75,52 +75,54 @@ const TableBody: FC<TableBodyProps> = ({
     return data || '-'
   }
 
-  if (data) {
-    return (
-      <Fragment>
-        {data.map((record, key) => (
-          <TableBodyRow
-            key={`row-${key}`}
-            role="rowgroup"
-            noborder={data.length === key + 1}
-            selected={checkSelected(key)}
-            size={Object.keys(columns).length}
-          >
-            {selectable && (
-              <TableBodyRowSelectableCell
-                selectable={!!selectable}
-                size={Object.keys(columns).length}
-              >
-                <InputSelect
-                  type={selectable}
-                  onSelect={handleSelectedRow}
-                  data={record}
-                  index={key}
-                  name={`row-${selectable}`}
-                />
-              </TableBodyRowSelectableCell>
-            )}
-            {Object.keys(columns).map((column, index) => (
-              <TableBodyCell
-                key={`cell-${key}-${index}`}
-                role="cell"
-                size={Object.keys(columns).length}
-                selectable={!!selectable}
-              >
-                <strong className="header-title" title={columns[column].label}>
-                  {columns[column].label}:{' '}
-                </strong>
-                <span title={getRowValue(record[column], columns[column])}>
-                  {getRowValue(record[column], columns[column])}
-                </span>
-              </TableBodyCell>
-            ))}
-          </TableBodyRow>
-        ))}
-      </Fragment>
-    )
+  if (!data) {
+    return null
   }
-  return null
+
+  return (
+    <Fragment>
+      {data.map((record, key) => (
+        <TableBodyRow
+          key={`row-${key}`}
+          role="row"
+          noborder={data.length === key + 1}
+          selected={checkSelected(key)}
+          size={Object.keys(columns).length}
+        >
+          {selectable && (
+            <TableBodyRowSelectableCell
+              selectable={!!selectable}
+              role="cell"
+              size={Object.keys(columns).length}
+            >
+              <InputSelect
+                type={selectable}
+                onSelect={handleSelectedRow}
+                data={record}
+                index={key}
+                name={`row-${selectable}`}
+              />
+            </TableBodyRowSelectableCell>
+          )}
+          {Object.keys(columns).map((column, index) => (
+            <TableBodyCell
+              key={`cell-${key}-${index}`}
+              role="cell"
+              size={Object.keys(columns).length}
+              selectable={!!selectable}
+            >
+              <strong className="header-title" title={columns[column].label}>
+                {columns[column].label}:{' '}
+              </strong>
+              <span title={getRowValue(record[column], columns[column])}>
+                {getRowValue(record[column], columns[column])}
+              </span>
+            </TableBodyCell>
+          ))}
+        </TableBodyRow>
+      ))}
+    </Fragment>
+  )
 }
 
 export default TableBody

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import Table from '../src';
-import { TableProps } from '../src/types';
+import { Selectable, TableProps } from '../src/types';
 import { action } from '@storybook/addon-actions';
 
 const meta: Meta = {
@@ -29,7 +29,7 @@ const meta: Meta = {
     },
     selectable: {
       description: 'Row selectable',
-      options: ['', 'single', 'multiple'],
+      options: ['', Selectable.single, Selectable.multiple],
       control: {
         type: 'select',
       },

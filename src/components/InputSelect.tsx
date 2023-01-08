@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, ReactElement } from 'react'
 import { SelectProps, Selectable } from '../types'
 import { Checkmark, CheckmarkRadio, Input, InputContainer } from './components'
 
@@ -8,31 +8,29 @@ const InputSelect: FC<SelectProps> = ({
   onSelect,
   name,
   index,
-}) => {
+}): ReactElement | null => {
+  const handleSelect = () => {
+    onSelect(data, index)
+  }
+
   if (type === Selectable.single) {
     return (
-      <InputContainer title="Select">
-        <Input
-          type="radio"
-          name={name}
-          onChange={() => onSelect(data, index)}
-        />
+      <InputContainer title="Select" role="radio">
+        <Input type="radio" name={name} onChange={handleSelect} />
         <CheckmarkRadio className="checkmark" />
       </InputContainer>
     )
   }
+
   if (type === Selectable.multiple) {
     return (
-      <InputContainer title="Select">
-        <Input
-          type="checkbox"
-          name={name}
-          onChange={() => onSelect(data, index)}
-        />
+      <InputContainer title="Select" role="checkbox">
+        <Input type="checkbox" name={name} onChange={handleSelect} />
         <Checkmark className="checkmark" />
       </InputContainer>
     )
   }
+
   return null
 }
 

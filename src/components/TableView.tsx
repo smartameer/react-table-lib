@@ -1,5 +1,10 @@
-import React, { FC, useMemo } from 'react'
-import { ColumnMappings, TableViewProps } from '../types'
+import React, { FC, useMemo, useState } from 'react'
+import {
+  ColumnMappings,
+  SortOrder,
+  TableRecord,
+  TableViewProps,
+} from '../types'
 import TableHeader from './TableHeader'
 import TableBody from './TableBody'
 import { TableContainer } from './components'
@@ -22,6 +27,8 @@ const TableView: FC<TableViewProps> = ({
   selectable,
   onSelect,
 }) => {
+  const [records, setRecords] = useState<TableRecord[]>(data)
+
   const columnsList = useMemo(() => {
     let headers = {} as ColumnMappings
     if (columns && Object.keys(columns).length > 0) {
@@ -42,15 +49,29 @@ const TableView: FC<TableViewProps> = ({
     return headers
   }, [columns, data])
 
+  const handleSort = (column: string, order: SortOrder): void => {
+    const sortedRecords = [...data]
+    sortedRecords.sort((a: TableRecord, b: TableRecord) => {
+      if (typeof a[column] === 'string') {
+        // @ts-ignore
+        return order === SortOrder.asc ? a[column].localeCompare(b[column]) : b[column].localeCompare(a[column])
+      }
+      // @ts-ignore
+      return order === SortOrder.asc ? a[column] - b[column] : b[column] - a[column]
+    })
+    setRecords(sortedRecords)
+  }
+
   return (
     <TableContainer role="table" aria-label={title}>
       <TableHeader
         title={title}
         columns={columnsList}
         selectable={selectable}
+        onSort={handleSort}
       />
       <TableBody
-        data={data}
+        data={records}
         columns={columnsList}
         selectable={selectable}
         onSelect={onSelect}

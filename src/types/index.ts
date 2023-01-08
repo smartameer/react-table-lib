@@ -5,6 +5,11 @@ export enum Selectable {
   multiple = 'multiple',
 }
 
+export enum SortOrder {
+  asc = 0,
+  desc = 1,
+}
+
 interface Background {
   default?: string
   selected?: string
@@ -41,6 +46,12 @@ export interface ColumnMappings {
   [key: string]: ColumnMapping
 }
 
+export interface SortButtonProps {
+  column: string
+  order: SortOrder | null
+  onSelect: (...args: any[]) => void
+}
+
 export interface TableProps extends HTMLAttributes<HTMLDivElement> {
   data: Array<TableRecord> | null | undefined
   title?: string
@@ -57,6 +68,13 @@ export interface TableViewProps extends HTMLAttributes<HTMLDivElement> {
   columns?: ColumnMappings
   selectable?: Selectable
   onSelect?: (...args: any[]) => any
+}
+
+export interface TableHeaderProps {
+  title?: string
+  columns: ColumnMappings
+  selectable?: Selectable
+  onSort?: (column: string, order: SortOrder) => any
 }
 
 export interface TableBodyProps {

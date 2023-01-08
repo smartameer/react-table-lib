@@ -2,7 +2,6 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import Table from '../src';
 import { TableProps } from '../src/types';
-import { action } from '@storybook/addon-actions';
 
 const meta: Meta = {
   title: 'Table',
@@ -75,7 +74,7 @@ const columns = {
   },
   '3g_availability': {
     'label': '3G Availability',
-    'format': data => data ? 'Yes' : 'No'
+    'format': (data : any) => data ? 'Yes' : 'No'
   }
 }
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
@@ -85,7 +84,9 @@ export const Default = Template.bind({});
 Default.args = {
   data
 };
-
+Default.parameters = {
+  jest: 'Table',
+};
 export const Error = Template.bind({});
 
 Error.args = {

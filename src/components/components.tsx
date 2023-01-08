@@ -4,6 +4,45 @@ import { device } from '../theme/devices'
 const responsiveRadius = (radius: number) =>
   radius >= 8 && radius / 2 < 8 ? 8 : radius / 2
 
+export const Button = styled.button`
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  background: transparent;
+  margin: 0 10px;
+  border: none;
+  appearance: none;
+  &:hover,
+  &:focus,
+  &.active {
+    background: ${props => props.theme.background.selected || '#efedfd'};
+    box-shadow: 0 2px 0 ${props => props.theme.background.shadow || '#f3f3f3'};
+  }
+  & > img {
+    margin-top: 2px;
+    width: 22px;
+    height: 22px;
+    user-select: none;
+  }
+  @media ${device.xs} {
+    width: 28px;
+    height: 28px;
+    & > img {
+      width: 18px;
+      height: 18px;
+    }
+  }
+  @media ${device.lg} {
+    width: 36px;
+    height: 36px;
+    & > img {
+      width: 22px;
+      height: 22px;
+    }
+  }
+`
+
 export const InputContainer = styled.label`
   display: block;
   position: relative;
@@ -101,7 +140,7 @@ export const TableHeaderComponent = styled.div.attrs(
   letter-spacing: 0;
   font-family: 'Avenir Heavy', arial, sans-serif;
   display: flex;
-  background: ${(props => props.theme.background?.header) || '#f3f3f3'};
+  background: ${(props => props.theme.background?.header) || '#f5f5f5'};
   @media ${device.xs} {
     font-size: 16px;
     padding: 16px;
@@ -276,4 +315,15 @@ export const TableContainer = styled.div`
   @media ${device.lg} {
     border-radius: ${(props => props.theme.radius) || 16}px;
   }
+`
+export const ErrorContainer = styled.div`
+  color: tomato;
+  display: flex;
+  justify-content: center;
+  align-items: middle;
+  padding: 24px;
+  box-shadow: 0 2px 6px 2px
+    ${(props => props.theme.background?.shadow) || '#ececec'};
+  background: ${(props => props.theme.background?.default) || 'white'};
+  border-radius: ${(props => props.theme.radius) || 16}px;
 `

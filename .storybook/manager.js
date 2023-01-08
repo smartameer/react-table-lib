@@ -7,6 +7,7 @@ const Theme = create({
   fontCode: 'monospace',
   enableShortcuts: false,
   barSelectedColor: '#4937ad',
+  appBg: '#efedfd',
   brandTitle: 'Table Component',
   fontBase: "'Avenir Book', arial, sans-serif",
 })

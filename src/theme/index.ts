@@ -5,7 +5,7 @@ const DefaultTheme = {
   background: {
     default: '#ffffff',
     selected: '#efedfd',
-    header: '#ececec',
+    header: '#f5f5f5',
     shadow: '#f3f3f3',
   },
   color: {
