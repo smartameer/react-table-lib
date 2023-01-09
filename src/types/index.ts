@@ -5,6 +5,11 @@ export enum Selectable {
   multiple = 'multiple',
 }
 
+export interface SortConfig {
+  column: string
+  order: SortOrder
+}
+
 export enum SortOrder {
   asc = 0,
   desc = 1,
@@ -74,7 +79,7 @@ export interface TableHeaderProps {
   title?: string
   columns: ColumnMappings
   selectable?: Selectable
-  onSort?: (column: string, order: SortOrder) => any
+  onSort: (column: string, order: SortOrder) => any
 }
 
 export interface TableBodyProps {

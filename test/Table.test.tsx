@@ -1,7 +1,7 @@
 import React from 'react'
 import { cleanup, render } from '@testing-library/react'
 import { Default as Table } from '../stories/Table.stories'
-import { camelCase } from '../src/components/components'
+import { capitalize } from '../src/utils'
 
 const data = [
   {
@@ -39,18 +39,18 @@ describe('Basic Table: ', () => {
     const headerCell = queryAllByRole('columnheader')[0]
     expect(headerCell.textContent).toEqual(title)
   })
-  it('should render column camelcase if column maping not available', () => {
+  it('should render column capitalize if column maping not available', () => {
     const { queryAllByRole } = render(<Table data={data} />)
     expect(queryAllByRole('columnheader')).toHaveLength(3)
     const headerCell = queryAllByRole('columnheader')[2]
-    expect(headerCell.textContent).toEqual(camelCase(Object.keys(data[0])[2]))
+    expect(headerCell.textContent).toEqual(capitalize(Object.keys(data[0])[2]))
   })
   it('should render cell value "-" if data unavailable', () => {
     const { queryAllByRole } = render(<Table data={data} />)
     expect(queryAllByRole('cell')).toHaveLength(12)
     const headerCell = queryAllByRole('cell')[4]
     expect(headerCell.textContent).toEqual(
-      camelCase(Object.keys(data[0])[1]) + ': -'
+      capitalize(Object.keys(data[0])[1]) + ': -'
     )
   })
   it('should render boolean cell value as string(true/false)', () => {
@@ -58,7 +58,7 @@ describe('Basic Table: ', () => {
     expect(queryAllByRole('cell')).toHaveLength(12)
     const headerCell = queryAllByRole('cell')[2]
     expect(headerCell.textContent).toEqual(
-      camelCase(Object.keys(data[0])[2]) + ': true'
+      capitalize(Object.keys(data[0])[2]) + ': true'
     )
   })
 })

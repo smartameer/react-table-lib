@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { SortButtonProps, SortOrder } from '../types'
-import { Button } from './components'
+import { Button } from './StyledComponents'
 
 const SortButton: FC<SortButtonProps> = ({ column, order, onSelect }) => {
   let img =
@@ -19,6 +19,7 @@ const SortButton: FC<SortButtonProps> = ({ column, order, onSelect }) => {
 
   return (
     <Button
+      role="button"
       onClick={handleSelect}
       className={order !== null ? 'active' : ''}
       title={

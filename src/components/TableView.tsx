@@ -2,8 +2,9 @@ import React, { FC, useMemo } from 'react'
 import { ColumnMappings, TableViewProps } from '../types'
 import TableHeader from './TableHeader'
 import TableBody from './TableBody'
-import { TableContainer, camelCase } from './components'
 import useSortableData from '../hooks/SortableData'
+import { capitalize } from '../utils'
+import { TableContainer } from './StyledComponents'
 
 const TableView: FC<TableViewProps> = ({
   title,
@@ -23,7 +24,7 @@ const TableView: FC<TableViewProps> = ({
       const headerList = {} as ColumnMappings
       keys.map((item, index) => {
         headerList[item] = {
-          label: camelCase(item),
+          label: capitalize(item),
           priority: index,
           sortable: false,
         }

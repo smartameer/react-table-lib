@@ -5,10 +5,10 @@ module.exports = {
   modulePathIgnorePatterns: ['node_modules', '.jest-test-results.json'],
   coverageThreshold: {
     global: {
-      branches: 14,
-      functions: 13,
-      lines: 34,
-      statements: 35
+      branches: 84.5,
+      functions: 98.5,
+      lines: 98,
+      statements: 98
     }
   },
   testEnvironment: "jsdom",

@@ -10,7 +10,7 @@ import {
   TableBodyCell,
   TableBodyRow,
   TableBodyRowSelectableCell,
-} from './components'
+} from './StyledComponents'
 
 interface RowsSelected {
   [key: string]: string | null
@@ -75,10 +75,6 @@ const TableBody: FC<TableBodyProps> = ({
       }
     }
     return data || '-'
-  }
-
-  if (!data) {
-    return null
   }
 
   return (

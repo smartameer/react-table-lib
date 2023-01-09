@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react'
 import { SortOrder, TableHeaderProps } from '../types'
+import SortButton from './SortButton'
+import { capitalize } from '../utils'
 import {
   TableHeaderCell,
   TableHeaderComponent,
   TableHeaderSelectableCell,
-  camelCase,
-} from './components'
-import SortButton from './SortButton'
+} from './StyledComponents'
 
 const TableHeader: FC<TableHeaderProps> = ({
   columns,
@@ -19,9 +19,6 @@ const TableHeader: FC<TableHeaderProps> = ({
   const [sortOrder, setSortOrder] = useState<SortOrder | null>(null)
 
   const handleSort = (columnKey: string): void => {
-    if (!onSort) {
-      return
-    }
     const order =
       sortColumn === columnKey
         ? sortOrder === SortOrder.asc
@@ -62,7 +59,7 @@ const TableHeader: FC<TableHeaderProps> = ({
           role="columnheader"
           className="non-responsive"
         >
-          {columns[key].label || camelCase(key)}
+          {columns[key].label || capitalize(key)}
           {columns[key].sortable && (
             <SortButton
               column={key}

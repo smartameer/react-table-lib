@@ -1,6 +1,11 @@
 import React, { FC, ReactElement } from 'react'
 import { SelectProps, Selectable } from '../types'
-import { Checkmark, CheckmarkRadio, Input, InputContainer } from './components'
+import {
+  Checkmark,
+  CheckmarkRadio,
+  Input,
+  InputContainer,
+} from './StyledComponents'
 
 const InputSelect: FC<SelectProps> = ({
   type,

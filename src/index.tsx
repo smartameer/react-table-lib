@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import TableView from './components/TableView'
 import { TableProps } from './types'
 import DefaultTheme from './theme'
-import { ErrorContainer } from './components/components'
+import { ErrorContainer } from './components/StyledComponents'
 
 class Table extends Component {
   constructor(props: TableProps) {

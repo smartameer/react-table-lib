@@ -102,4 +102,27 @@ describe('Single Select Table: ', () => {
       `background: ${DefaultTheme.background?.selected}`
     )
   })
+
+  it('should return selected records for onSelect', () => {
+    const mockObj = {
+      handleSelect: jest.fn,
+    }
+    const handleSelectSpy = spyOn(mockObj, 'handleSelect')
+
+    const { queryAllByTitle } = render(
+      <Single
+        data={data}
+        columns={columns}
+        selectable={Selectable.single}
+        onSelect={mockObj.handleSelect}
+      />
+    )
+    const rowSelect = queryAllByTitle('Select')[0].getElementsByTagName(
+      'input'
+    )[0]
+    fireEvent.click(rowSelect)
+
+    expect(handleSelectSpy).toHaveBeenCalledTimes(1)
+    expect(handleSelectSpy).toHaveBeenCalledWith(data[0])
+  })
 })
