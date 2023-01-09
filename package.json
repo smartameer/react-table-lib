@@ -15,6 +15,7 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "test:watch": "tsdx test --watch --json --outputFile=.jest-test-results.json",
+    "test:coverage": "tsdx test --coverage",
     "lint": "tsdx lint src test stories",
     "prepare": "tsdx build",
     "size": "size-limit",
