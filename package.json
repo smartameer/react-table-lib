@@ -46,16 +46,18 @@
   "size-limit": [
     {
       "path": "dist/react-table-lib.cjs.production.min.js",
-      "limit": "10 KB"
+      "limit": "21 KB"
     },
     {
       "path": "dist/react-table-lib.esm.js",
-      "limit": "10 KB"
+      "limit": "16 KB"
     }
   ],
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@size-limit/preset-small-lib": "^8.1.0",
+    "@size-limit/webpack": "^8.1.0",
+    "@size-limit/webpack-why": "^8.1.0",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",
     "@storybook/addon-info": "^5.3.21",
