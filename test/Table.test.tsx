@@ -1,6 +1,7 @@
 import React from 'react'
 import { cleanup, render } from '@testing-library/react'
 import { Default as Table } from '../stories/Table.stories'
+import { camelCase } from '../src/components/components'
 
 const data = [
   {
@@ -10,7 +11,6 @@ const data = [
   },
   {
     operator: '*DiGi Telecom (LTE)',
-    headset_display: 'DiGi 1800 / DiGi / MYMY18',
     '3g_availability': true,
   },
   {
@@ -25,24 +25,40 @@ const data = [
   },
 ]
 
-// const columns = {
-//   'operator': {
-//     'label': 'Operator'
-//   },
-//   'headset_display': {
-//     'label': 'Headset Display'
-//   },
-//   '3g_availability': {
-//     'label': '3G Availability',
-//     'format': data => data ? 'Yes' : 'No'
-//   }
-// }
-
-describe('Table', () => {
+describe('Basic Table: ', () => {
   afterEach(cleanup)
-  it('should render basic table with data', () => {
+  it('should render with data', () => {
     const { queryAllByRole } = render(<Table data={data} />)
     expect(queryAllByRole('table')).toBeTruthy()
     expect(queryAllByRole('table')).toHaveLength(1)
+  })
+  it('should render with hidden title', () => {
+    const title = 'Test Title'
+    const { queryAllByRole } = render(<Table data={data} title={title} />)
+    expect(queryAllByRole('columnheader')).toHaveLength(4)
+    const headerCell = queryAllByRole('columnheader')[0]
+    expect(headerCell.textContent).toEqual(title)
+  })
+  it('should render column camelcase if column maping not available', () => {
+    const { queryAllByRole } = render(<Table data={data} />)
+    expect(queryAllByRole('columnheader')).toHaveLength(3)
+    const headerCell = queryAllByRole('columnheader')[2]
+    expect(headerCell.textContent).toEqual(camelCase(Object.keys(data[0])[2]))
+  })
+  it('should render cell value "-" if data unavailable', () => {
+    const { queryAllByRole } = render(<Table data={data} />)
+    expect(queryAllByRole('cell')).toHaveLength(12)
+    const headerCell = queryAllByRole('cell')[4]
+    expect(headerCell.textContent).toEqual(
+      camelCase(Object.keys(data[0])[1]) + ': -'
+    )
+  })
+  it('should render boolean cell value as string(true/false)', () => {
+    const { queryAllByRole } = render(<Table data={data} />)
+    expect(queryAllByRole('cell')).toHaveLength(12)
+    const headerCell = queryAllByRole('cell')[2]
+    expect(headerCell.textContent).toEqual(
+      camelCase(Object.keys(data[0])[2]) + ': true'
+    )
   })
 })

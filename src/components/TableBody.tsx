@@ -63,14 +63,16 @@ const TableBody: FC<TableBodyProps> = ({
   }
 
   const getRowValue = (data: any, column: ColumnMapping): string => {
-    if (column['format']) {
-      return column['format'](data)
-    }
+    if (data !== null && typeof data !== 'undefined') {
+      if (column['format']) {
+        return column['format'](data)
+      }
 
-    try {
-      return data.toString()
-    } catch (error) {
-      console.log('Error in transforming to string', error)
+      try {
+        return data.toString()
+      } catch (error) {
+        console.log('Error in transforming to string', error)
+      }
     }
     return data || '-'
   }

@@ -1,13 +1,9 @@
-import React, { FC, useMemo, useState } from 'react'
-import {
-  ColumnMappings,
-  SortOrder,
-  TableRecord,
-  TableViewProps,
-} from '../types'
+import React, { FC, useMemo } from 'react'
+import { ColumnMappings, TableViewProps } from '../types'
 import TableHeader from './TableHeader'
 import TableBody from './TableBody'
 import { TableContainer, camelCase } from './components'
+import useSortableData from '../hooks/SortableData'
 
 const TableView: FC<TableViewProps> = ({
   title,
@@ -16,7 +12,7 @@ const TableView: FC<TableViewProps> = ({
   selectable,
   onSelect,
 }) => {
-  const [records, setRecords] = useState<TableRecord[]>(data)
+  const { records, handleSort } = useSortableData(data)
 
   const columnsList = useMemo(() => {
     let headers = {} as ColumnMappings
@@ -28,7 +24,7 @@ const TableView: FC<TableViewProps> = ({
       keys.map((item, index) => {
         headerList[item] = {
           label: camelCase(item),
-          order: index,
+          priority: index,
           sortable: false,
         }
         return item
@@ -37,21 +33,6 @@ const TableView: FC<TableViewProps> = ({
     }
     return headers
   }, [columns, data])
-
-  const handleSort = (column: string, order: SortOrder): void => {
-    const sortedRecords = [...data]
-    sortedRecords.sort((a: TableRecord, b: TableRecord) => {
-      const valueA = a[column] === null ? '' : a[column];
-      const valueB = b[column] === null ? '' : b[column];
-      if (typeof valueA === 'string') {
-        // @ts-ignore
-        return order === SortOrder.asc ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA)
-      }
-      // @ts-ignore
-      return order === SortOrder.asc ? (valueA > valueB ? -1 : ((valueA < valueB) ? 1 : 0)) : (valueA < valueB ? -1 : ((valueA > valueB) ? 1 : 0))
-    })
-    setRecords(sortedRecords)
-  }
 
   return (
     <TableContainer role="table" aria-label={title}>

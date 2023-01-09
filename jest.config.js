@@ -14,5 +14,6 @@ module.exports = {
   testEnvironment: "jsdom",
   globals: {
     "IS_REACT_ACT_ENVIRONMENT": true
-  }
+  },
+  setupFilesAfterEnv: ["./jest.setup.ts"],
 }

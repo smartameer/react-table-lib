@@ -38,7 +38,7 @@ export interface TableRecord {
 export interface ColumnMapping {
   label: string
   sortable?: boolean
-  order?: number
+  priority?: number
   format?: (...args: any[]) => string
 }
 
@@ -53,7 +53,7 @@ export interface SortButtonProps {
 }
 
 export interface TableProps extends HTMLAttributes<HTMLDivElement> {
-  data: Array<TableRecord> | null | undefined
+  data?: Array<TableRecord> | null | undefined
   title?: string
   theme?: ThemeModel
   columns?: ColumnMappings

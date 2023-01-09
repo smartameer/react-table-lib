@@ -1,8 +1,8 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react';
-import Table from '../src';
-import { Selectable, TableProps } from '../src/types';
-import { action } from '@storybook/addon-actions';
+import React from 'react'
+import { Meta, Story } from '@storybook/react'
+import Table from '../src'
+import { Selectable, TableProps } from '../src/types'
+import { action } from '@storybook/addon-actions'
 
 const meta: Meta = {
   title: 'Table Selectable',
@@ -11,21 +11,20 @@ const meta: Meta = {
     title: {
       description: 'Title',
       control: {
-        type: 'text'
-      }
+        type: 'text',
+      },
     },
     data: {
       description: 'Input data',
       control: {
-        type: 'object'
-      }
+        type: 'object',
+      },
     },
     columns: {
       description: 'Column to data key mapping',
       control: {
-        type: 'object'
+        type: 'object',
       },
-      defaultValue: {}
     },
     selectable: {
       description: 'Row selectable',
@@ -33,117 +32,125 @@ const meta: Meta = {
       control: {
         type: 'select',
       },
-      defaultValue: null
     },
   },
   parameters: {
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
-};
+}
 
-export default meta;
+export default meta
 
-const Template: Story<TableProps> = args => <Table {...args} />;
+const Template: Story<TableProps> = args => <Table {...args} />
 
-
-export const Single = Template.bind({});
+export const Single = Template.bind({})
 
 Single.args = {
   title: 'Contact Details',
   data: [
     {
-      'name': 'Mavis Chen',
-      'mobile': '8899 7654',
-      'expiry': '12/01/2022',
-      'penalty': 600
+      name: 'Mavis Chen',
+      mobile: '8899 7654',
+      expiry: '12/01/2022',
+      penalty: 600,
     },
     {
-      'name': 'Rodney Artichoke',
-      'mobile': '9988 7676',
-      'expiry': '12/02/2022',
-      'penalty': 300
+      name: 'Rodney Artichoke',
+      mobile: '9988 7676',
+      expiry: '12/02/2022',
+      penalty: 300,
     },
     {
-      'name': 'Valentino Morose',
-      'mobile': '8900 7654',
-      'expiry': '12/03/2022',
-      'penalty': 300
+      name: 'Valentino Morose',
+      mobile: '8900 7654',
+      expiry: '12/03/2022',
+      penalty: 300,
     },
     {
-      'name': 'Eric Widget',
-      'mobile': '8900 7654',
-      'expiry': '12/04/2022',
-      'penalty': 300
-    }
+      name: 'Eric Widget',
+      mobile: '8900 7654',
+      expiry: '12/04/2022',
+      penalty: 300,
+    },
   ],
   columns: {
-    'name': {
-      'label': 'Name'
+    name: {
+      label: 'Name',
     },
-    'mobile': {
-      'label': 'Mobile'
+    mobile: {
+      label: 'Mobile',
     },
-    'expiry': {
-      'label': 'Expiry',
-      'format': (data) => {
-        const d = new Date(data);
-        return d.toLocaleString('default', { month: 'short' }) + ' ' + d.getFullYear()
-      }
+    expiry: {
+      label: 'Expiry',
+      format: (data: any) => {
+        const d = new Date(data)
+        return (
+          d.toLocaleString('default', { month: 'short' }) +
+          ' ' +
+          d.getFullYear()
+        )
+      },
     },
-    'penalty': {
-      'label': 'Penality',
-      'format': (data) => '$' + data
-    }
+    penalty: {
+      label: 'Penality',
+      format: (data: any) => '$' + data,
+    },
   },
-  selectable: 'single',
-  onSelect: action('selected')
-};
+  selectable: Selectable.single,
+  onSelect: action('selected'),
+}
 
-export const Mutiple = Template.bind({});
+Single.parameters = {
+  jest: 'SingleSelect',
+}
+
+export const Mutiple = Template.bind({})
 
 Mutiple.args = {
   title: 'Account Details',
   data: [
     {
-      'company': 'Blue Ocean International',
-      'brn': '198702333K'
+      company: 'Blue Ocean International',
+      brn: '198702333K',
     },
     {
-      'company': 'Red Electronics',
-      'brn': '198900364N'
+      company: 'Red Electronics',
+      brn: '198900364N',
     },
     {
-      'company': 'Yellow Gaming',
-      'brn': '196700335H'
+      company: 'Yellow Gaming',
+      brn: '196700335H',
     },
     {
-      'company': 'Purple Automobiles',
-      'brn': '196800306E'
+      company: 'Purple Automobiles',
+      brn: '196800306E',
     },
     {
-      'company': 'Diamond Interiors Holdings',
-      'brn': '199131124V'
+      company: 'Diamond Interiors Holdings',
+      brn: '199131124V',
     },
     {
-      'company': 'Omnichannel Solutions International',
-      'brn': '200201624D'
-    }
+      company: 'Omnichannel Solutions International',
+      brn: '200201624D',
+    },
   ],
   columns: {
-    'brn': {
-      'label': 'BRN'
+    brn: {
+      label: 'BRN',
     },
-    'company': {
-      'label': 'Company Name'
-    }
+    company: {
+      label: 'Company Name',
+    },
   },
-  selectable: 'multiple',
-  onSelect: action('selected')
-};
+  selectable: Selectable.multiple,
+  onSelect: action('selected'),
+}
 
+Mutiple.parameters = {
+  jest: 'MultiSelect',
+}
 
-
-export const Themed = Template.bind({});
+export const Themed = Template.bind({})
 
 Themed.args = {
   title: 'Talk Time Details',
@@ -151,76 +158,80 @@ Themed.args = {
     {
       destination: 'Bangladesh',
       mins: 240,
-      rate_per_min: 0.03
+      rate_per_min: 0.03,
     },
     {
       destination: 'China',
       mins: 600,
-      rate_per_min: 0.01
+      rate_per_min: 0.01,
     },
     {
       destination: 'India',
       mins: 600,
-      rate_per_min: 0.01
+      rate_per_min: 0.01,
     },
     {
       destination: 'Indonesia',
       mins: 90,
-      rate_per_min: 0.07
+      rate_per_min: 0.07,
     },
     {
       destination: 'Malaysia',
       mins: 60,
-      rate_per_min: 0.01
+      rate_per_min: 0.01,
     },
     {
       destination: 'Myanmar',
       mins: 35,
-      rate_per_min: 0.17
+      rate_per_min: 0.17,
     },
     {
       destination: 'Philipines',
       mins: 40,
-      rate_per_min: 0.15
+      rate_per_min: 0.15,
     },
     {
       destination: 'Thailand',
       mins: 120,
-      rate_per_min: 0.05
+      rate_per_min: 0.05,
     },
     {
       destination: 'Vietnam',
       mins: 60,
-      rate_per_min: 0.10
+      rate_per_min: 0.1,
     },
   ],
   columns: {
-    'destination' : {
-      label: 'Destination'
+    destination: {
+      label: 'Destination',
     },
-    'mins': {
-      label: 'Mins'
+    mins: {
+      label: 'Mins',
     },
-    'rate_per_min': {
+    rate_per_min: {
       label: 'Rate/min',
-      format: data => '$' + data
-    }
+      format: (data: any) => '$' + data,
+    },
   },
-  selectable: 'single',
+  selectable: Selectable.single,
   theme: {
     radius: 3,
     background: {
       default: '#fefef3',
       selected: '#ddffcc',
       header: '#333333',
-      shadow: '#ececec'
+      shadow: '#ececec',
     },
     color: {
       default: '#282828',
       border: '#dddddd',
       header: '#eeeeee',
       selected: '#004c00',
-      primary: '#449966'
-    }
-  }
-};
+      primary: '#449966',
+    },
+  },
+}
+
+Themed.parameters = {
+  jest: 'Themed',
+}

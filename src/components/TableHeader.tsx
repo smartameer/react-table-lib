@@ -44,14 +44,16 @@ const TableHeader: FC<TableHeaderProps> = ({
           &nbsp;
         </TableHeaderSelectableCell>
       )}
-      <TableHeaderCell
-        selectable={!!selectable}
-        size={1}
-        role="columnheader"
-        className="responsive"
-      >
-        {title}
-      </TableHeaderCell>
+      {title && (
+        <TableHeaderCell
+          selectable={!!selectable}
+          size={1}
+          role="columnheader"
+          className="responsive"
+        >
+          {title}
+        </TableHeaderCell>
+      )}
       {columnsList.map(key => (
         <TableHeaderCell
           selectable={!!selectable}

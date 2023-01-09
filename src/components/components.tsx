@@ -144,7 +144,6 @@ export const Input = styled.input`
 export const TableHeaderComponent = styled.div.attrs(
   (props: { size: number; selectable: boolean }) => props
 )`
-  flex-flow: row wrap;
   padding: 24px;
   align-items: center;
   line-height: 1.75;
@@ -153,6 +152,7 @@ export const TableHeaderComponent = styled.div.attrs(
   display: flex;
   background: ${(props => props.theme.background?.header) || '#f5f5f5'};
   @media ${device.xs} {
+    flex-flow: row wrap;
     font-size: 16px;
     padding: 16px;
     border-top-left-radius: ${(props => responsiveRadius(props.theme.radius)) ||
@@ -185,6 +185,7 @@ export const TableHeaderComponent = styled.div.attrs(
       responsiveRadius(props.theme.radius)) || 8}px;
   }
   @media ${device.lg} {
+    flex-flow: row;
     font-size: 20px;
     padding: 24px;
     border-top-left-radius: ${(props => props.theme.radius) || 16}px;
@@ -208,6 +209,7 @@ export const TableHeaderCell = styled.div.attrs(
     ${props => (props.selectable ? '(100% - 48px)' : '100%')} /
       ${props => props.size}
   );
+  min-width: 180px;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
@@ -225,9 +227,8 @@ export const TableBodyRow = styled.div.attrs(
   display: flex;
   align-items: center;
   font-family: 'Avenir Book', arial, sans-serif;
-  flex-flow: row wrap;
-
   @media ${device.xs} {
+    flex-flow: row wrap;
     padding: 8px 16px;
   }
   @media ${device.sm} {
@@ -237,6 +238,7 @@ export const TableBodyRow = styled.div.attrs(
     padding: 8px 16px;
   }
   @media ${device.lg} {
+    flex-flow: row;
     padding: 24px;
   }
   ${props =>
@@ -273,8 +275,16 @@ export const TableBodyCell = styled.div.attrs(
     );
     ${props =>
       props.size > 3 - (!!props.selectable ? 1 : 0)
-        ? 'margin-left: 48px;margin-top: -10px;margin-bottom: 16px;'
+        ? 'margin-left: ' +
+          (!!props.selectable ? '48px' : 0) +
+          ';margin-top: -10px;margin-bottom: 16px;'
         : ''}
+    &:first-of-type {
+      padding-top: 8px;
+    }
+    &:last-of-type {
+      margin-bottom: 0;
+    }
     ${props =>
       props.size > 3 - (!!props.selectable ? 1 : 0)
         ? '& > .header-title {width: 40%; max-width: 110px; display: inline-block;}'
@@ -286,6 +296,7 @@ export const TableBodyCell = styled.div.attrs(
       ${props => (props.selectable ? '(100% - 48px)' : '100%')} /
         ${props => props.size}
     );
+    min-width: 180px;
     margin: inherit;
     & .header-title {
       display: none;
@@ -311,10 +322,9 @@ export const TableContainer = styled.div`
   box-shadow: 0 4px 4px 0px
     ${(props => props.theme.background.shadow) || '#f3f3f3'};
   display: block;
-  width: 100%;
-  max-width: 98vw;
   font-family: 'Avenir Book', arial, sans-serif;
   @media ${device.xs} {
+    width: 100%;
     border-radius: ${(props => responsiveRadius(props.theme.radius)) || 8}px;
   }
   @media ${device.xs} {
@@ -324,6 +334,11 @@ export const TableContainer = styled.div`
     border-radius: ${(props => responsiveRadius(props.theme.radius)) || 8}px;
   }
   @media ${device.lg} {
+    overflow-x: auto;
+    display: inline-flex;
+    flex-direction: column;
+    width: auto;
+    min-width: 100%;
     border-radius: ${(props => props.theme.radius) || 16}px;
   }
 `
