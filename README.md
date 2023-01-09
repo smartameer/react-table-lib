@@ -1,6 +1,5 @@
 # React Table
 
-
 ### Installation
 
 ```sh
@@ -68,9 +67,9 @@ import Table from 'react-table-lib'
   )
   ```
 
-### API
+### Table Properties
 
-| Props / Methods | Default | Type | Required | Details |
+| Props/Methods | Default | Type | Required | Details |
 |---|---|---|---|--|
 | data | - | array | true | Table Records in array format with each entry holding `key : value` pair |
 | columns | {} | object | false |Each property for data's entry's header property <br/>Ref: [Columns](#columns)|
@@ -78,7 +77,7 @@ import Table from 'react-table-lib'
 | onSelect | - | function | false | Callback to get selected records details.<br/> `callback data`: record (or) array of records |
 
 
-### Columns
+### Columns Properties
 
 | Property | type | Details |
 |---|---|---|
