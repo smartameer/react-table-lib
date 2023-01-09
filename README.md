@@ -58,7 +58,7 @@ import Table from 'react-table-lib'
     age: { label: "Age", format: (data) => data + 'yrs' }
   }
 
-  cconst handleSelect = (data) => {
+  const handleSelect = (data) => {
     // do something
     // data [{ name: "Earline Stokes", age: 30 }]
   }
