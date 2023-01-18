@@ -5,7 +5,10 @@
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "!**/**/*.test.ts",
+    "!**/**/*.test.tsx",
+    "README.md"
   ],
   "engines": {
     "node": ">=16"
@@ -42,8 +45,13 @@
     "styled-components": "^5"
   },
   "name": "react-table-lib",
-  "author": "Pradeep",
+  "description": "React responsive table library",
+  "author": "smartameer",
   "module": "dist/react-table-lib.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smartameer/react-table-lib.git"
+  },
   "size-limit": [
     {
       "path": "dist/react-table-lib.cjs.production.min.js",

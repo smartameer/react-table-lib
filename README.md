@@ -84,3 +84,11 @@ import Table from 'react-table-lib'
 | `label` | string | Table Header column name |
 | `sortable` | boolean | Column sortable property |
 | `format` | function | Formatting table record for the same column |
+
+
+
+### Demo
+
+[Code Sandbox](http://codesandbox.io/p/github/smartameer/react-table-lib/master)
+
+> Note: Please run `yarn storybook` to see demo. You can run this in your local too to check the same
